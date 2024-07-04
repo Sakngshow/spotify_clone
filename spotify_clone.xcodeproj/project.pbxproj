@@ -26,6 +26,7 @@
 		391740F32C3298610045C712 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391740F22C3298610045C712 /* UserProfile.swift */; };
 		391740F52C34E4FC0045C712 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391740F42C34E4FC0045C712 /* Extensions.swift */; };
 		391740F72C35363A0045C712 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391740F62C35363A0045C712 /* AuthResponse.swift */; };
+		391740F92C3654D50045C712 /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391740F82C3654D50045C712 /* SettingsModels.swift */; };
 		39D86A522C3281070055A59E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D86A512C3281070055A59E /* AppDelegate.swift */; };
 		39D86A542C3281070055A59E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D86A532C3281070055A59E /* SceneDelegate.swift */; };
 		39D86A562C3281070055A59E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D86A552C3281070055A59E /* HomeViewController.swift */; };
@@ -53,6 +54,7 @@
 		391740F22C3298610045C712 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		391740F42C34E4FC0045C712 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		391740F62C35363A0045C712 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		391740F82C3654D50045C712 /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
 		39D86A4E2C3281070055A59E /* spotify_clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spotify_clone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39D86A512C3281070055A59E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39D86A532C3281070055A59E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				391740F02C3298390045C712 /* Artist.swift */,
 				391740F22C3298610045C712 /* UserProfile.swift */,
 				391740F62C35363A0045C712 /* AuthResponse.swift */,
+				391740F82C3654D50045C712 /* SettingsModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				391740E52C3297320045C712 /* SearchResultsViewController.swift in Sources */,
 				391740DB2C3295E70045C712 /* WelcomeViewController.swift in Sources */,
 				391740DF2C3296A10045C712 /* ProfileViewController.swift in Sources */,
+				391740F92C3654D50045C712 /* SettingsModels.swift in Sources */,
 				391740D32C3295550045C712 /* SearchViewController.swift in Sources */,
 				391740EB2C3297DE0045C712 /* HapticsManager.swift in Sources */,
 				391740F72C35363A0045C712 /* AuthResponse.swift in Sources */,
