@@ -1,0 +1,5 @@
+ extern const unsigned char Pods_spotify_cloneVersionString[];
+ extern const double Pods_spotify_cloneVersionNumber;
+
+ const unsigned char Pods_spotify_cloneVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:Pods_spotify_clone  PROJECT:Pods-1" "\n";
+ const double Pods_spotify_cloneVersionNumber __attribute__ ((used)) = (double)1.;

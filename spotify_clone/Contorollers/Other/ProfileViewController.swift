@@ -4,7 +4,6 @@
 //
 //  Created by SANGSHOW on 7/1/24.
 //
-
 import SDWebImage
 import UIKit
 
@@ -69,7 +68,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             return
         }
 
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.with/1.5))
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.width/1.5))
+
         let imageSize: CGFloat = headerView.height/2
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageSize, height: imageSize))
         headerView.addSubview(imageView)
@@ -79,9 +79,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = imageSize/2
 
-
         tableView.tableHeaderView = headerView
-
     }
 
     private func failedToGetProfile() {
@@ -105,4 +103,5 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.selectionStyle = .none
         return cell
     }
+
 }
