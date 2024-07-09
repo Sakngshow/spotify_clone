@@ -21,7 +21,7 @@ final class APICaller{
         case faileedToGetdata
     }
 
-    public func getCurrentUserProfile(completion: @escaping (Result<UserProfile, Error>) -> Void){
+    public func getCurrentUserProfile(completion: @escaping (Result<UserProfile, Error>) -> Void) {
         createRequest(
             with: URL(string: Constants.baseAPIURL + "/me"),
             type: .GET
@@ -34,9 +34,8 @@ final class APICaller{
 
                 do {
                     let result = try JSONDecoder().decode(UserProfile.self, from: data)
-              completion(.success(result))
+                    completion(.success(result))
                 }
-
                 catch {
                     print(error.localizedDescription)
                     completion(.failure(error))
@@ -47,7 +46,7 @@ final class APICaller{
     }
 
     public func getNewReleases(completion: @escaping ((Result<NewReleasesResponse, Error>)) -> Void) {
-        createRequest(with: URL(string: Constants.baseAPIURL + "/browse/new-releases?limit=2"), type: .GET) { request in
+        createRequest(with: URL(string: Constants.baseAPIURL + "/browse/new-releases?limit=50"), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else {
                     completion(.failure(APIError.faileedToGetdata))
@@ -56,23 +55,21 @@ final class APICaller{
 
                 do {
                     let result = try JSONDecoder().decode(NewReleasesResponse.self, from: data)
-                    print(result)
                     completion(.success(result))
 
                 }
                 catch {
                     completion(.failure(error))
-
                 }
             }
             task.resume()
         }
     }
 
-    public func getFeaturedPlaylists(completion: @escaping ((Result<NewReleasesResponse, Error>) -> Void)) {
+    public func getFeaturedPlaylists(completion: @escaping ((Result<FeaturedPlaylistsResponse, Error>) -> Void)) {
         createRequest(
             with: URL(string: Constants.baseAPIURL + "/browse/featured-playlists?limit=2"),
-                      type: .GET
+            type: .GET
         ) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else {
@@ -81,7 +78,7 @@ final class APICaller{
                 }
 
                 do {
-                    let result = try JSONDecoder().decode(NewReleasesResponse.self, from: data)
+                    let result = try JSONDecoder().decode(FeaturedPlaylistsResponse.self, from: data)
                     completion(.success(result))
 
                 }
@@ -91,13 +88,13 @@ final class APICaller{
                 }
             }
             task.resume()
-
         }
     }
-    public func getRecommendations(genres: Set<String>, completion: @escaping ((Result)<RecommendationsResponse, Error>) -> Void)) {
+
+    public func getRecommendations(genres: Set<String>, completion: @escaping ((Result<RecommendationsResponse, Error>) -> Void)) {
         let seeds = genres.joined(separator: ",")
         createRequest(
-            with: URL(string: Constants.baseAPIURL + "/recommendations?limit=2&seed_genres=\(seeds)"),
+            with: URL(string: Constants.baseAPIURL + "/recommendations?limit=40&seed_genres=\(seeds)"),
             type: .GET
         ) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
@@ -121,55 +118,56 @@ final class APICaller{
         }
     }
 
-    public func getRecommendGenres(completion: @escaping ((Result<RecommendedGenresResponse, Error>) -> Void)) {createRequest(with: URL(string: Constants.baseAPIURL + "/recommendations/available-genre-seeds",type: .GET ) { request in
-        let task = URLSession.shared.dataTask(with: request) { data, _, error in}
-        guard let data = data, error == nil else {
-            completion(.failure(APIError.faileedToGetdata))
-            return
-        }
+    public func getRecommendGenres(completion: @escaping ((Result<RecommendedGenresResponse, Error>) -> Void)) {
+        createRequest(
+            with: URL(string: Constants.baseAPIURL + "/recommendations/available-genre-seeds"), type: .GET )
+        { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.faileedToGetdata))
+                    return
+                }
 
-        do {
-            let result = try JSONDecoder().decode(RecommendedGenresResponse.self, from: data)
-                   completion(.success(result))
+                do {
+                    let result = try JSONDecoder().decode(RecommendedGenresResponse.self, from: data)
+                    completion(.success(result))
+                }
+                catch {
+                    completion(.failure(error))
 
-        }
-        catch {
-            completion(.failure(error))
+                }
+            }
+            task.resume()
 
         }
     }
-    task.resume()
-
-    }
-
-    }
-
 
     // MARK: - Private
 
-        enum HTTPMethod: String {
-            case GET
-            case POST
-        }
+    enum HTTPMethod: String {
+        case GET
+        case POST
+    }
 
-        private func createRequest(
-            with url: URL?,
-            type : HTTPMethod,
-            completion: @escaping (URLRequest) -> Void
-        ) {
-            AuthManager.shared.withValidToken { token in
-                guard let apiURL = url else {
-                    return
-                }
-                var request = URLRequest(url: apiURL)
-                request.setValue("Bearer \(token)",
-                                 forHTTPHeaderField: "Authorization")
-                request.httpMethod = type.rawValue
-                request.timeoutInterval = 30
-                completion(request)
-
+    private func createRequest(
+        with url: URL?,
+        type : HTTPMethod,
+        completion: @escaping (URLRequest) -> Void
+    ) {
+        AuthManager.shared.withValidToken { token in
+            guard let apiURL = url else {
+                return
             }
+            var request = URLRequest(url: apiURL)
+            request.setValue("Bearer \(token)",
+                             forHTTPHeaderField: "Authorization")
+            request.httpMethod = type.rawValue
+            request.timeoutInterval = 30
+            completion(request)
+
         }
+    }
 
 
 
+}
